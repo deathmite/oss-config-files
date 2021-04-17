@@ -1,0 +1,47 @@
+
+
+server:
+  port: 8090
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:${SQL_PORT:1433};databaseName=${SQL_DB:xe2dev};
+    username: ${SQL_USERNAME:sa}
+    password: ${SQL_PASSWORD:root123}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver 
+    hikari: 
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+  application:
+    name: product-service
+
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+        
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    instanceId: ${spring.application.name}
+  client:
+    # Eureka Server URL
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    healthcheck:
+      enabled: true
+
+  
