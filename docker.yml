@@ -1,0 +1,51 @@
+server:
+  port: 8091
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://xe2dev.cnxocunlrmpk.us-east-2.rds.amazonaws.com:3306/xe2dev
+    username: sa
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver 
+    hikari: 
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+  application:
+    name: product
+
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8888 #link to cloud config server
+      label: main #name of git repo branch
+  profiles:
+    active: product
+     
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+        
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    instanceId: ${spring.application.name}
+  client:
+    # Eureka Server URL
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    healthcheck:
+      enabled: true
+      
