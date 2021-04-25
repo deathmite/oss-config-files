@@ -1,12 +1,12 @@
 server:
-  port: 8091
+  port: 8095
 
 spring:
   datasource:
-    url: jdbc:sqlserver://xe2dev.cnxocunlrmpk.us-east-2.rds.amazonaws.com:3306/xe2dev
-    username: sa
-    password: root1234
-    driver-class-name: com.mysql.cj.jdbc.Driver 
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:mysql://xe2dev.cnxocunlrmpk.us-east-2.rds.amazonaws.com:${SQL_PORT:1433};databaseName=${SQL_DB:xe2dev}; # for aws mysql db
+    username: sa # for aws mysql db
+    password: root1234 # for aws mysql db
     hikari: 
       connection-test-query: SELECT 1
       minimum-idle: 1
