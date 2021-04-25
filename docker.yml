@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:mysql://xe2dev.cnxocunlrmpk.us-east-2.rds.amazonaws.com:${SQL_PORT:1433};databaseName=${SQL_DB:xe2dev}; # for aws mysql db
+    url: jdbc:sqlserver://xe2dev.cnxocunlrmpk.us-east-2.rds.amazonaws.com:${SQL_PORT:1433};databaseName=${SQL_DB:xe2dev}; # for aws mysql db
     username: sa # for aws mysql db
     password: root1234 # for aws mysql db
     hikari: 
